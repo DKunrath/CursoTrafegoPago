@@ -54,17 +54,6 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-      });
-      if (error) throw error;
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-    }
-  };
-
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-[#1C2128] rounded-lg p-8 max-w-md w-full relative">
@@ -78,23 +67,6 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         <h2 className="text-2xl font-bold mb-6 text-white">
           {isLogin ? 'Login' : 'Criar Conta'}
         </h2>
-
-        <button
-          onClick={handleGoogleLogin}
-          className="w-full bg-white text-gray-800 font-semibold py-2 px-4 rounded-lg mb-4 flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors"
-        >
-          <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5" />
-          Continuar com Google
-        </button>
-
-        <div className="relative my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-700"></div>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-[#1C2128] text-gray-400">ou</span>
-          </div>
-        </div>
 
         <form onSubmit={handleSubmit}>
           {!isLogin && (

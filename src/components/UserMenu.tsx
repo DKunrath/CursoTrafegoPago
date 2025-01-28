@@ -48,15 +48,26 @@ export function UserMenu({ user, onSignOut }: UserMenuProps) {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-[#1C2128] rounded-lg shadow-lg py-1 border border-gray-700">
-          <button
-            onClick={onSignOut}
-            className="w-full px-4 py-2 text-left text-gray-300 hover:bg-[#2D3440] flex items-center gap-2"
-          >
-            <LogOut className="w-4 h-4" />
-            Sair
-          </button>
-        </div>
+        <>
+          {/* Overlay to handle clicks outside */}
+          <div 
+            className="fixed inset-0 z-40"
+            onClick={() => setIsOpen(false)}
+          />
+          {/* Dropdown menu */}
+          <div className="absolute right-0 mt-2 w-48 bg-[#1C2128] rounded-lg shadow-lg py-1 border border-gray-700 z-50">
+            <button
+              onClick={() => {
+                onSignOut();
+                setIsOpen(false);
+              }}
+              className="w-full px-4 py-2 text-left text-gray-300 hover:bg-[#2D3440] flex items-center gap-2"
+            >
+              <LogOut className="w-4 h-4" />
+              Sair
+            </button>
+          </div>
+        </>
       )}
     </div>
   );
